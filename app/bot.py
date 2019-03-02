@@ -1,12 +1,19 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from simple_settings import settings
+from time import sleep
+from quest import Quest
+
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s\n%(message)s\n',
                     level=logging.INFO,
                     filename=settings.logfile)
 
-start_text = "Привет! Я тот, кто будет водить. Собери всех участников в чатик и пригласи меня туда. Когда все будут готовы просто напишите /start_quest"
+
+start_text = "Привет! Я тот, кто будет вас водить. Собери всех участников в чатик и пригласи меня туда." \
+             "Когда все будут готовы просто напишите /start_quest"
+q = Quest()
+chat_id = 0
 
 
 def logger(func):
@@ -20,43 +27,55 @@ def logger(func):
     return wrapper
 
 
+def send_messages(bot, *messages):
+    methods = {
+        'voice': bot.send_voice,
+        'photo': bot.send_photo,
+        'text': bot.send_message
+    }
+
+    for message in messages:
+        func = methods[message['type']]
+        func(chat_id, message['payload'])
+        sleep(2)
+
+
 @logger
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id,
-                     text='Привет, пригласи меня в чатик твоей команды...')
+                     text=start_text)
 
 
-next_response = 'Next Quest Started /answer'
-answer_response = 'Good job! /start'
-tip_response = 'Here is your tip /next'
+@logger
+def start_quest(bot, update):
+    chat_id = update.message.chat_id
+    messages = q.start_task()
+    send_messages(messages)
+
 
 @logger
 def next_quest(bot, update):
-    bot.send_message(chat_id=update.message.chat_id,
-                     text=next_response)
+    messages = q.end_task() + q.start_task()
+    send_messages(messages)
 
-@logger
-def check_answer(bot, update):
-    bot.send_message(chat_id=update.message.chat_id,
-                     text=answer_response)
 
-@logger
-def get_tip(bot, update):
-    bot.send_message(chat_id=update.message.chat_id,
-                     text=tip_response)
+# @logger
+# def get_tip(bot, update):
+#     bot.send_message(chat_id=update.message.chat_id,
+#                      text=tip_response)
+
 
 updater = Updater(settings.token)
 dispatcher = updater.dispatcher
 
 start_handler = CommandHandler('start', start)
-answer_handler = CommandHandler('answer', check_answer)
+start_quest_handler = CommandHandler('start_quest', start_quest)
 next_handler = CommandHandler('next', next_quest)
-tip_handler = CommandHandler('tip', get_tip)
+# tip_handler = CommandHandler('tip', get_tip)
 
 dispatcher.add_handler(start_handler)
-dispatcher.add_handler(answer_handler)
+dispatcher.add_handler(start_quest_handler)
 dispatcher.add_handler(next_handler)
-dispatcher.add_handler(tip_handler)
+# dispatcher.add_handler(tip_handler)
 
 updater.start_polling()
-
