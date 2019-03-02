@@ -10,10 +10,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s\n%(message)s\
                     filename=settings.logfile)
 
 
-start_text = "Привет! Я тот, кто будет вас водить. Собери всех участников в чатик и пригласи меня туда." \
-             "Когда все будут готовы просто напишите /start_quest"
 q = Quest()
 chat_id = 0
+start_text = "Привет! Я тот, кто будет вас водить по квесту. Собери всех участников в чатик и пригласи меня туда." \
+             "Когда все будут готовы просто напишите /start_quest"
 
 
 def logger(func):
@@ -31,13 +31,14 @@ def send_messages(bot, *messages):
     methods = {
         'voice': bot.send_voice,
         'photo': bot.send_photo,
-        'text': bot.send_message
+        'text': bot.send_message,
+        'doc': bot.send_document
     }
 
     for message in messages:
         func = methods[message['type']]
         func(chat_id, message['payload'])
-        sleep(2)
+        sleep(message['delay'])
 
 
 @logger
