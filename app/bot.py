@@ -11,7 +11,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s\n%(message)s\
 
 
 q = Quest()
-chat_id = 0
 start_text = "Привет! Я тот, кто будет вас водить по квесту. Собери всех участников в чатик и пригласи меня туда." \
              "Когда все будут готовы просто напишите /start_quest"
 
@@ -37,7 +36,7 @@ def send_messages(bot, *messages):
 
     for message in messages:
         func = methods[message['type']]
-        func(chat_id, message['payload'])
+        func(q.chat_id, message['payload'])
         sleep(message['delay'])
 
 
@@ -49,15 +48,15 @@ def start(bot, update):
 
 @logger
 def start_quest(bot, update):
-    chat_id = update.message.chat_id
+    q.chat_id = update.message.chat_id
     messages = q.start_task()
-    send_messages(messages)
+    send_messages(bot, *messages)
 
 
 @logger
 def next_quest(bot, update):
     messages = q.end_task() + q.start_task()
-    send_messages(messages)
+    send_messages(bot, *messages)
 
 
 # @logger
