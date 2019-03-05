@@ -28,30 +28,60 @@ tasks = [
         [
             {
                 'type': 'text',
-                'payload': 'В качестве разминки вот вам заколдованный текст',
+                'payload': 'Ваше путешествие начинается здесь',
                 'delay': 2,
             },
             {
-                'type': 'doc',
-                'payload': '', # ToDo вставить документ
+                'type': 'text',
+                'payload': 'Картинка с памятником Пушкина', # ToDo вставить документ
+                'delay': 5,
+            },
+            {
+                'type': 'text',
+                'payload': 'Ваше первое задание: найти со мной общий язык',
+                'delay': 2,
+            },
+            {
+                'type': 'text',
+                'payload': '0JLQsdC70LjQt9C4INCi0LLQtdGA0YHQutC+0LPQviDQuCDQod' \
+                           'GC0YDQsNGB0YLQvdC+0LPQviwK0JIg0LzQtdGC0YDQviDQt9C0' \
+                           '0LXRgdGMINCf0YPRiNC60LjQvdGB0LrQsNGPINCy0YXQvtC0Lg' \
+                           'rQmCDQsiDQutCw0LzQvdC1INC90LDRiCDQv9C+0Y3RgiDRgdGD' \
+                           '0YDQvtCy0L4K0J3QsCDQv9C10YDQtdC60YDQtdGB0YLQstC1IN' \
+                           'C30LTQtdGB0Ywg0LLQsNGBINC20LTQtdGCLg==',
                 'delay': 0,
             },
         ],
         [
             {
                 'type': 'text',
-                'payload': 'Не очень удобно с телефона, правда? В любом случае, следущая остановка: Гнездинский переулок',
+                'payload': 'Славное начало квеста!'
                 'delay': 2,
             }
         ]
     ),
+    Task(
+        [
+            {
+                'type': 'text',
+                'payload': 'А может небольшой постик в инсту на память?',
+                'delay': 0,
+            },
+        ],
+        [
+            {
+                'type': 'text',
+                'payload': '',
+                'delay
+            }
+        ],
     # Гнездинский
     Task(
         [
             {
                 'type': 'text',
-                'payload': 'До прибытия на место назначения не вскрывать!',
-                'delay': 2,
+                'payload': 'Пора посетить Гнездинский переулок',
+                'delay': 50,
             },
             {
                 'type': 'voice',

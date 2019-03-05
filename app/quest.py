@@ -8,6 +8,7 @@ class Quest:
     def __init__(self):
         self.task = None
         self.chat_id = 0
+        self.admin = 134349351
         if settings.test:
             self.gen = (task for task in test_tasks)
         else:
