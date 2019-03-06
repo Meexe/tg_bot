@@ -87,8 +87,8 @@ tasks = [
                 'delay': 2,
             },
             {
-             	'type': 'text',
-                'payload': '1. Ну кароч этот переулок крут',
+             	'type': 'voice',
+                'payload': open(settings.base + 'voices/nest.ogg', 'rb'),
                 'delay': 30,
             },
             {
@@ -161,7 +161,7 @@ tasks = [
 	    [
             {
                 'type': 'text',
-                'payload': '2. Никитские Ворота', # TODO Никитские Ворота
+                'payload': open(settings.base + 'voices/nikitskie.ogg', 'rb'),
                 'delay': 20,
             },
             {
@@ -172,8 +172,8 @@ tasks = [
                 'delay': 2,
             },
             {
-                'type': 'text',
-                'payload': 'Фото кафе', # TODO Фото кафе
+                'type': 'photo',
+                'payload': open(settings.base + 'photos/UHtVwkUicKc.jpg', 'rb'),
                 'delay': 0,
             },
 	    ],
@@ -220,7 +220,7 @@ tasks = [
         [
 	        {
          	    'type': 'text',
-                'payload': '3. Особняк Маргариты', # TODO Особняк Маргариты
+                'payload': 'Ленивые пидоры еще не сделали', # open(settings.base + 'voices/mansion.ogg', 'rb'),
                 'delay': 20,
             },
         ],
@@ -254,7 +254,7 @@ tasks = [
             },
 	        {
              	'type': 'text',
-                'payload': '4. Патриаршие', # TODO голосовуха Патриаршие. Про историю Патриарших/рельсы и что с ними стало
+                'payload': open(settings.base + 'voices/lakes.ogg', 'rb'),
                 'delay': 20,
             },
 	        {
