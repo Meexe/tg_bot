@@ -83,7 +83,7 @@ start_quest_handler = CommandHandler('start_quest', start_quest)
 next_handler = CommandHandler('next', next_quest)
 get_tip_handler = CommandHandler('tip', get_tip)
 give_tip_handler = CommandHandler('give_tip', give_tip, pass_args=True)
-input_handler = MessageHandler(Filters.text, handle_input)
+input_handler = MessageHandler((~ Filters.command), handle_input)
 
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(start_quest_handler)
